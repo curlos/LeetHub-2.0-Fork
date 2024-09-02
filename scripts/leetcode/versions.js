@@ -13,7 +13,9 @@ function LeetCodeV1() {
   this.progressSpinnerElementClass = 'leethub_progress';
   this.injectSpinnerStyle();
 }
+
 LeetCodeV1.prototype.init = async function () {};
+
 /* Function for finding and parsing the full code. */
 /* - At first find the submission details url. */
 /* - Then send a request for the details page. */
@@ -314,6 +316,7 @@ function LeetCodeV2() {
   this.progressSpinnerElementClass = 'leethub_progress';
   this.injectSpinnerStyle();
 }
+
 LeetCodeV2.prototype.init = async function () {
   const submissionId = this.submissionId;
 
@@ -338,6 +341,7 @@ LeetCodeV2.prototype.init = async function () {
 
   this.submissionData = data;
 };
+
 LeetCodeV2.prototype.findCode = function () {
   const code = this.getCode();
   if (!code) {
@@ -346,6 +350,7 @@ LeetCodeV2.prototype.findCode = function () {
 
   return code;
 };
+
 LeetCodeV2.prototype.getCode = function () {
   if (this.submissionData != null) {
     return this.submissionData.code;
@@ -376,13 +381,16 @@ LeetCodeV2.prototype.getLanguageExtension = function () {
 
   return languages[lang];
 };
+
 LeetCodeV2.prototype.getNotesIfAny = function () {};
+
 LeetCodeV2.prototype.getProblemNameSlug = function () {
   const slugTitle = this.submissionData.question.titleSlug;
   const qNum = this.submissionData.question.questionId;
 
   return addLeadingZeros(qNum + '-' + slugTitle);
 };
+
 LeetCodeV2.prototype.getSuccessStateAndUpdate = function () {
   const successTag = document.querySelectorAll('[data-e2e-locator="submission-result"]');
   if (checkElem(successTag)) {
@@ -392,6 +400,7 @@ LeetCodeV2.prototype.getSuccessStateAndUpdate = function () {
   }
   return false;
 };
+
 LeetCodeV2.prototype.parseStats = function () {
   if (this.submissionData != null) {
     const runtimePercentile =
@@ -418,6 +427,7 @@ LeetCodeV2.prototype.parseStats = function () {
 
   return formatStats(time, timePercentile, space, spacePercentile);
 };
+
 LeetCodeV2.prototype.parseQuestion = function () {
   let markdown;
   if (this.submissionData != null) {
@@ -436,6 +446,7 @@ LeetCodeV2.prototype.parseQuestion = function () {
 
   return markdown;
 };
+
 LeetCodeV2.prototype.parseQuestionTitle = function () {
   if (this.submissionData != null) {
     return this.submissionData.question.title;
@@ -453,6 +464,7 @@ LeetCodeV2.prototype.parseQuestionTitle = function () {
 
   return questionTitle;
 };
+
 LeetCodeV2.prototype.parseQuestionDescription = function () {
   if (this.submissionData != null) {
     return this.submissionData.question.content;
@@ -464,6 +476,7 @@ LeetCodeV2.prototype.parseQuestionDescription = function () {
   }
   return description[0].content;
 };
+
 LeetCodeV2.prototype.parseDifficulty = function () {
   if (this.submissionData != null) {
     return getDifficulty(this.submissionData.question.difficulty);
@@ -476,6 +489,7 @@ LeetCodeV2.prototype.parseDifficulty = function () {
   // Else, we're not on the description page. Nothing we can do.
   return 'unknown';
 };
+
 LeetCodeV2.prototype.startSpinner = function () {
   let elem = document.getElementById('leethub_progress_anchor_element');
   if (!elem) {
@@ -486,11 +500,13 @@ LeetCodeV2.prototype.startSpinner = function () {
   elem.innerHTML = `<div id="${this.progressSpinnerElementId}" class="${this.progressSpinnerElementClass}"></div>`;
   this.insertToAnchorElement(elem);
 };
+
 LeetCodeV2.prototype.injectSpinnerStyle = function () {
   const style = document.createElement('style');
   style.textContent = `.${this.progressSpinnerElementClass} {pointer-events: none;width: 2.0em;height: 2.0em;border: 0.4em solid transparent;border-color: #eee;border-top-color: #3E67EC;border-radius: 50%;animation: loadingspin 1s linear infinite;} @keyframes loadingspin { 100% { transform: rotate(360deg) }}`;
   document.head.append(style);
 };
+
 LeetCodeV2.prototype.insertToAnchorElement = function (elem) {
   if (document.URL.startsWith('https://leetcode.com/explore/')) {
     // TODO: support spinner when answering problems on Explore pages
@@ -514,6 +530,7 @@ LeetCodeV2.prototype.insertToAnchorElement = function (elem) {
     target.appendChild(elem);
   }
 };
+
 LeetCodeV2.prototype.markUploaded = function () {
   let elem = document.getElementById(this.progressSpinnerElementId);
   if (elem) {
@@ -522,6 +539,7 @@ LeetCodeV2.prototype.markUploaded = function () {
       'display: inline-block;transform: rotate(45deg);height:24px;width:12px;border-bottom:7px solid #78b13f;border-right:7px solid #78b13f;';
   }
 };
+
 LeetCodeV2.prototype.markUploadFailed = function () {
   let elem = document.getElementById(this.progressSpinnerElementId);
   if (elem) {

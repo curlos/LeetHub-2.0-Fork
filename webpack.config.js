@@ -27,6 +27,7 @@ const ignore = [
   '**/scripts/leetcode/**',
   '**/scripts/welcome.js',
   '**/scripts/popup.js',
+  '**/manifest.json',
   '**/manifest-chrome.json',
   '**/manifest-firefox.json',
   // ...entries.map((entry) => `**/${entry}.js`),
